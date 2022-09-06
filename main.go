@@ -22,13 +22,12 @@ func main() {
 	}
 	turn := 1
 
-	clearScreen()
-	fmt.Println("Welcome to Bad Tic Tac Toe!")
-	displayBoard(&board)
-
 	// Run game loop
 
 	reader := bufio.NewReader(os.Stdin)
+	clearScreen()
+	fmt.Println("Welcome to Bad Tic Tac Toe!")
+	displayBoard(&board)
 
 	for {
 		// Get symbol and display instructions
