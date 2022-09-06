@@ -46,9 +46,15 @@ func main() {
 		// Parse player input
 
 		input, _ := reader.ReadString('\n')
-		row, col, valid := parseInput(strings.TrimSpace(input))
+		input = strings.TrimSpace(input)
+		row, col, valid := parseInput(input)
 
-		fmt.Println(row, col, valid)
+		if !valid || board[row][col] != 0 {
+			clearScreen()
+			fmt.Printf("\"%v\" is not a valid input square, please try again (i.e. a1)\n", input)
+			displayBoard(&board)
+			continue
+		}
 	}
 }
 
