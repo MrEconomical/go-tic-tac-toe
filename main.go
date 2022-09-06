@@ -8,10 +8,10 @@ import "fmt"
 
 func main() {
 	// Initialize board and turn counter
-	// Board square: 0 = Empty, 1 = Player X, 2 = Player O
-	// Turn: 1 = Player X, 2 = Player O
+	// Board square: 0 = empty, 1 = player X, 2 = player O
+	// Turn: 1 = player X, 2 = player O
 
-	board := [3][3]int{
+	board := [3][3]uint{
 		{0, 0, 0},
 		{0, 0, 0},
 		{0, 0, 0},
@@ -22,18 +22,33 @@ func main() {
 }
 
 // Check for player win or draw
+// 0 = no result, 1/2 = win, 3 = draw
 
-/*func checkResult(board *[3][3]int) bool {
+func checkResult(board *[3][3]uint) uint {
 	// Check rows
 
-	for r, row := range board {
-
+	for _, row := range board {
+		if r := checkValues(row[0], row[1], row[2]); r != 0 {
+			return r
+		}
 	}
-}*/
+
+	return 0
+}
+
+// Check for win from three values
+// 0 = no result, 1/2 = win
+
+func checkValues(a, b, c uint) uint {
+	if a == b && b == c {
+		return a
+	}
+	return 0
+}
 
 // Print board to terminal with row and column labels
 
-func displayBoard(board *[3][3]int) {
+func displayBoard(board *[3][3]uint) {
 	fmt.Println("  1 2 3")
 	for r, row := range board {
 		fmt.Printf("%v ", r+1)
