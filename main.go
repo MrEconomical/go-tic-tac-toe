@@ -40,7 +40,7 @@ func main() {
 }
 
 // Check for player win or draw
-// 1/2 = win, 3 = draw
+// 0 = draw, 1/2 = win
 
 func checkResult(board *[3][3]uint) (uint, bool) {
 	// Check rows and columns
@@ -66,7 +66,7 @@ func checkResult(board *[3][3]uint) (uint, bool) {
 		return result, true
 	}
 
-	// Check draw if board full, no result if not
+	// Check draw if board full otherwise no result
 
 	for _, row := range board {
 		for _, s := range row {
@@ -76,7 +76,7 @@ func checkResult(board *[3][3]uint) (uint, bool) {
 		}
 	}
 
-	return 3, true
+	return 0, true
 }
 
 // Check for win from three values
