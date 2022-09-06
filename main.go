@@ -55,7 +55,12 @@ func main() {
 // Get row and column from player input
 
 func parseInput(input string) (uint, uint, bool) {
-	return 1, 1, true
+	if len(input) < 2 ||
+		(input[0] != 'a' && input[0] != 'b' && input[0] != 'c') ||
+		(input[1] != '1' && input[1] != '2' && input[1] != '3') {
+		return 0, 0, false
+	}
+	return uint(input[0]) - 97, uint(input[1]) - 49, true
 }
 
 // Check for player win or draw
