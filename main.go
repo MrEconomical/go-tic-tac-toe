@@ -1,6 +1,10 @@
 package main
 
+// Imports
+
 import "fmt"
+
+// Run Tic Tac Toe game
 
 func main() {
 	// Initialize board and turn counter
@@ -17,12 +21,22 @@ func main() {
 	displayBoard(&board)
 }
 
+// Check for player win or draw
+
+/*func checkResult(board *[3][3]int) bool {
+	// Check rows
+
+	for r, row := range board {
+
+	}
+}*/
+
 // Print board to terminal with row and column labels
 
 func displayBoard(board *[3][3]int) {
 	fmt.Println("  1 2 3")
 	for r, row := range board {
-		fmt.Printf("%v ", r + 1)
+		fmt.Printf("%v ", r+1)
 		for _, s := range row {
 			if s == 0 {
 				fmt.Print("_ ")
