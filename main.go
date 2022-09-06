@@ -21,14 +21,13 @@ func main() {
 		{0, 0, 0},
 		{0, 0, 0},
 	}
-	turn := 1
+	turn := uint(1)
 
 	// Run game loop
 
 	reader := bufio.NewReader(os.Stdin)
 	clearScreen()
 	fmt.Println("Welcome to Bad Tic Tac Toe!")
-	displayBoard(&board)
 
 	for {
 		// Get symbol and display instructions
@@ -40,6 +39,7 @@ func main() {
 			symbol = 'O'
 		}
 
+		displayBoard(&board)
 		fmt.Printf("Player %[1]v's turn (place an %[1]v)\n", string(symbol))
 		fmt.Println("Enter a square to make a move:")
 
@@ -52,9 +52,28 @@ func main() {
 		if !valid || board[row][col] != 0 {
 			clearScreen()
 			fmt.Printf("\"%v\" is not a valid input square, please try again (i.e. a1)\n", input)
-			displayBoard(&board)
 			continue
 		}
+
+		// Make move and check result
+
+		board[row][col] = turn
+		result, end := checkResult(&board)
+		if end {
+			clearScreen()
+			if result == 0 {
+				fmt.Println("Game drawn!")
+			} else if result == 1 {
+				fmt.Println("Player X wins!")
+			} else {
+				fmt.Println("Player O wins!")
+			}
+			displayBoard(&board)
+			break
+		}
+
+		clearScreen()
+		turn ^= 1
 	}
 }
 
