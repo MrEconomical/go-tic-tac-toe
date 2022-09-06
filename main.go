@@ -2,7 +2,11 @@ package main
 
 // Imports
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 // Run Tic Tac Toe game
 
@@ -24,6 +28,8 @@ func main() {
 
 	// Run game loop
 
+	reader := bufio.NewReader(os.Stdin)
+
 	for {
 		// Get symbol and display instructions
 
@@ -36,6 +42,11 @@ func main() {
 
 		fmt.Printf("Player %[1]v's turn (place an %[1]v)\n", string(symbol))
 		fmt.Println("Enter a square to make a move:")
+
+		// Parse player input
+
+		input, _ := reader.ReadString('\n')
+		fmt.Println(input)
 	}
 }
 
