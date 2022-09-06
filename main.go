@@ -25,15 +25,40 @@ func main() {
 // 0 = no result, 1/2 = win, 3 = draw
 
 func checkResult(board *[3][3]uint) uint {
-	// Check rows
+	// Check rows and columns
 
-	for _, row := range board {
-		if r := checkValues(row[0], row[1], row[2]); r != 0 {
-			return r
+	for r := 0; r < 3; r++ {
+		if result := checkValues(board[r][0], board[r][1], board[r][2]); result != 0 {
+			return result
 		}
 	}
 
-	return 0
+	for c := 0; c < 3; c++ {
+		if result := checkValues(board[0][c], board[1][c], board[2][c]); result != 0 {
+			return result
+		}
+	}
+
+	// Check diagonals
+
+	if result := checkValues(board[0][0], board[1][1], board[2][2]); result != 0 {
+		return result
+	}
+	if result := checkValues(board[2][0], board[1][1], board[0][2]); result != 0 {
+		return result
+	}
+
+	// Check draw if board full, no result if not
+
+	for _, row := range board {
+		for _, s := range row {
+			if s == 0 {
+				return 0
+			}
+		}
+	}
+
+	return 3
 }
 
 // Check for win from three values
