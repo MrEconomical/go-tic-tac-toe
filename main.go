@@ -16,9 +16,27 @@ func main() {
 		{0, 0, 0},
 		{0, 0, 0},
 	}
-	//turn := 1
+	turn := 1
 
+	clearScreen()
+	fmt.Println("Welcome to Bad Tic Tac Toe!")
 	displayBoard(&board)
+
+	// Run game loop
+
+	for {
+		// Get symbol and display instructions
+
+		var symbol rune
+		if turn == 1 {
+			symbol = 'X'
+		} else {
+			symbol = 'O'
+		}
+
+		fmt.Printf("Player %[1]v's turn (place an %[1]v)\n", string(symbol))
+		fmt.Println("Enter a square to make a move:")
+	}
 }
 
 // Check for player win or draw
