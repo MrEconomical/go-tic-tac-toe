@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // Run Tic Tac Toe game
@@ -45,8 +46,16 @@ func main() {
 		// Parse player input
 
 		input, _ := reader.ReadString('\n')
-		fmt.Println(input)
+		row, col, valid := parseInput(strings.TrimSpace(input))
+
+		fmt.Println(row, col, valid)
 	}
+}
+
+// Get row and column from player input
+
+func parseInput(input string) (uint, uint, bool) {
+	return 1, 1, true
 }
 
 // Check for player win or draw
@@ -104,7 +113,7 @@ func checkValues(a, b, c uint) uint {
 func displayBoard(board *[3][3]uint) {
 	fmt.Println("  1 2 3")
 	for r, row := range board {
-		fmt.Printf("%v ", r+1)
+		fmt.Print(rowLabel(r) + " ")
 		for _, s := range row {
 			if s == 0 {
 				fmt.Print("_ ")
@@ -114,9 +123,20 @@ func displayBoard(board *[3][3]uint) {
 				fmt.Print("O ")
 			}
 		}
-		fmt.Println(r + 1)
+		fmt.Println(rowLabel(r))
 	}
 	fmt.Println("  1 2 3")
+}
+
+// Get row label from index
+
+func rowLabel(index int) string {
+	if index == 0 {
+		return "a"
+	} else if index == 1 {
+		return "b"
+	}
+	return "c"
 }
 
 // Clear terminal screen
